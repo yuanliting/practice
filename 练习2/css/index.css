@@ -1,0 +1,86 @@
+@charset "utf-8";
+*{
+	text-shadow:none!important;
+}
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	/* Firefox */
+	-webkit-box-sizing: content-box;
+	/* Safari */
+}
+
+[v-cloak] {
+  display: none;
+}
+html {
+	-webkit-text-size-adjust: none;
+	/*解决chrome浏览器下字体不能小于12px*/
+	-webkit-overflow-scrolling: touch;
+	position: relative;
+	height:100%;
+}
+body{
+    height:100%;
+    -webkit-overflow-scrolling: touch;
+	font-family: 'Microsoft YaHei', helvetica, arial;
+    background-image: url('../img/背景.png');
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+	margin: 0px;
+    padding: 0px;
+    /* min-width: 989px; */
+}
+p {
+	text-align: justify;
+	text-justify: inter-ideograph;
+	-ms-text-justify: inter-ideograph;
+}
+img{vertical-align: middle;}
+p {
+	margin-bottom: 5px;
+}
+li{
+    list-style: none;
+    list-style-image: none;
+}
+a {
+	text-decoration: none;
+	font-family: "微软雅黑";
+	color:#fff;
+	text-shadow:none!important;
+}
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+	font-family: "微软雅黑";
+	color:#fff;
+}
+
+@media all and (orientation: landscape) {
+	/*横屏*/
+	body {
+		width: 100%;
+	}
+}
+
+@media all and (orientation: portrait) {
+	body {
+		width: 100%;
+		/*overflow-x: hidden;*/
+	}
+	/*竖屏*/
+}
+input,button{ margin:0; padding:0; list-style-type:none;}
+
+em {
+	font-style: normal;
+}
+
+
+
+
+
+

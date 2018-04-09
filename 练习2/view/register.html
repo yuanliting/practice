@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>注册页面</title>
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1" />
+  <link rel="stylesheet" type="text/css" href="../css/index.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <meta name="viewport" content="width=1024,maximum-scale=4,user-scalable=no">
+</head>
+<style>
+.logoWrap{
+        margin-top:5%;
+        margin-left:10%;
+        }
+.formData{
+        margin:10% auto;
+        box-sizing:border-box;
+        padding:5%;
+        width:35%;
+        background-color:rgba(0,0,0,.5);
+        border-radius:10px;
+        }
+.el-form-item__label{
+        font-size:25px;
+        color:rgba(255,255,255,.8);
+        font-weight:100;
+        }
+.el-input--small .el-input__inner {
+        height: 45px;
+        width:100%;
+        }
+.el-input__inner{
+        background:none;
+        border:solid 1px rgba(255,255,255,.8);
+        border-radius:25px;
+        color:rgba(255,255,255,.8);
+        font-size:25px;
+        }
+.el-button--primary {
+        background-color:none; 
+        border-color: rgba(255,255,255,.8);
+        padding:2% 15%;
+        }
+.el-button {
+        display: inline-block;
+        line-height: 1;
+        white-space: nowrap;
+        cursor: pointer;
+        background: none; 
+        color: rgba(255,255,255,.8);
+        -webkit-appearance: none;
+        text-align: center;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        outline: 0;
+        margin: 0;
+        -webkit-transition: .1s;
+        transition: .1s;
+        font-weight: 500;
+        padding: 2% 15%px;
+        font-size: 20px;
+        border-radius: 25px;
+        }
+</style>
+<body>
+  <div id="contain" style="" v-cloak>
+    <!-- 餐厅logo  -->
+    <div class="logoWrap">
+        <img src="../img/餐厅logo.png"></img>
+    </div>
+    <!-- 餐厅logo  -->
+
+    <!-- form表单 -->
+    <div class="formData">
+            <el-form ref="form" :model="form"  :rules="rules">
+
+                <el-form-item  label="手机号" prop="phoneNumber" label-width="110px">
+                    <el-input  v-model="form.phoneNumber"></el-input>
+                </el-form-item>
+
+                <el-form-item  label="密码" prop="pwd" label-width="100px">
+                    <el-input  v-model="form.pwd"></el-input>
+                </el-form-item>
+
+                <el-form-item label-width="130px" id="hiddenBtn">   
+                    <el-button type="primary" @click="registerForm('form')">注册</el-button>
+                </el-form-item>
+
+                <el-form-item label-width="130px">
+                    <el-button  type="primary" @click="loginForm('form')">登陆</el-button>
+                </el-form-item>
+                </el-form>
+    </div>
+    <!-- form表单 -->
+  </div>
+</body>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    let validatePhoneNumber = (rule, value, callback) => {
+        let reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
+        if(value == ''){
+            callback(new Error('请输入手机号码'));
+        }else if(!reg.test(value)){
+            callback(new Error('请输入你的合法手机号！'));
+        } else {
+            callback();
+        }
+    };
+           
+  let vm = new Vue({
+    el: '#contain',
+    data: {
+        form: {
+                phoneNumber: '',  
+                pwd:''
+          },
+        rules:{
+            phoneNumber: [
+                { required: true, validator:validatePhoneNumber, trigger: 'blur'}
+            ],
+            pwd: [
+                { required: true, message: '请输入你的密码！', trigger: 'blur' }
+            ],
+        }
+        },   
+      created:function(){
+          var self = this;
+                    
+      },
+      //自定义过滤器
+      filters: {
+        
+      },
+      mounted:function(){
+              
+      },
+    methods: {
+          loginForm: function(formName) {
+                    _that = this;
+                   this.$refs[formName].validate((valid) => {
+                       if(valid){
+                           console.log(_that.form)
+                        /*axios.post('/login',{ params:_that.form  })
+                        .then(function (response) {
+                          console.log(response)
+                           var json = response.data;
+                            if(json.code == 200){
+                                _that.$message({
+                                    message: '添加成功！',
+                                    type: 'success'
+                                });
+                                setTimeout(function(){
+                                    location.reload();
+                                },1000)
+                            }else{
+                                _that.$message.error(json.msg);
+                                return;
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });*/
+                         location.href =  'file:///C:/Users/admin/Desktop/练习2/view/index.html';
+                         /*setTimeout(function(){
+                                    location.href =  'file:///C:/Users/admin/Desktop/练习2/view/index.html';
+                                },1000)*/
+                       }else{
+                        console.log('error submit!!');
+                        return false;
+                       }
+                   })
+            },
+            registerForm: function(formName) {
+                    _that = this;
+                   this.$refs[formName].validate((valid) => {
+                       if(valid){
+                       /* axios.post('/register',{ params:_that.form  })
+                        .then(function (response) {
+                          console.log(response)
+                           var json = response.data;
+                            if(json.code == 200){
+                                _that.$message({
+                                    message: '添加成功！',
+                                    type: 'success'
+                                });
+                                setTimeout(function(){
+                                    location.reload();
+                                },1000)
+                            }else{
+                                _that.$message.error(json.msg);
+                                return;
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });*/
+                        
+                         _that.$message({
+                                    message: '注册成功！',
+                                    type: 'success'
+                                });
+                        $('#hiddenBtn').css('display','none');
+                         _that.phoneNumber = '';
+                         _that.pwd = '';
+                       }else{
+                        console.log('error submit!!');
+                        return false;
+                       }
+                   })
+            },
+        },
+  })
+</script>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>首页</title>
+    <link rel="stylesheet" href="../public/css/index.css" media="all" />
+      <link rel="stylesheet" href="../public/font-awesome/css/font-awesome.min.css" media="all" />
+      <link rel="stylesheet" href="../public/font-awesome/fonts/fontawesome-webfont.woff2" media="all" />
+      <script src="../public/js/jquery-3.2.1.js"></script>
+         <!-- 引入 ECharts 文件 -->
+      <script src="../public/js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="topWrap"></div>
+    <div id="app" v-cloak>
+        <div class="appTop">
+            <div class="leftWrap">
+                <img class="topLeftImg" src="../public/img/leftImg.jpg"></img>
+                <ul>
+                    <li>Name is Tim</li>
+                    <li>Please hold still,while i can see</li>
+                    <li>date:2018/2/27</li>
+                </ul>
+            </div>
+            <div class="rightWrap">
+                <ul>
+                    <li>Doc,not feeling that great :(</li>
+                    <li>date:2018/2/27</li>
+                </ul>
+                <img class="topRightImg" src="../public/img/rightImg.jpg"></img>
+            </div>
+        </div>
+        <div class="content">
+            <ul class="contentLeftUl">
+                <li class="contentLeftLi" >
+                    <i class="fa fa-area-chart"></i>
+                    <div class="hiddenWrapDiv active" id="one" >
+                        <p>第一个li标签</p>
+
+                    <div>
+                </li>
+                <li class="contentLeftLi">
+                    <i class="fa fa-pie-chart"></i>
+                    <div class="hiddenWrapDiv" id="pie">
+                        <p>第二个li标签</p>
+                    <div>
+                </li>
+                <li class="contentLeftLi">
+                    <i class="fa fa-bar-chart"></i>
+                    <div class="hiddenWrapDiv" id="main">
+                        <p>第三个li标签</p>
+                    <div>
+                </li>
+                  <li class="contentLeftLi">
+                    <i class="fa fa-line-chart"></i>
+                    <div class="hiddenWrapDiv" id="four">
+                        <p>第四个li标签</p>
+                    <div>
+                </li>
+                <li class="contentLeftLi">
+                    <i class="fa fa-line-chart"></i>
+                    <div class="hiddenWrapDiv" id="five">
+                        <p>第五个li标签</p>
+                    <div>
+                </li>
+            </ul>
+            <ul class="iconUl">
+                <li class="iconLi"><span class="active"></span><li>
+                <li class="iconLi"><span></span><li>
+                <li class="iconLi"><span></span><li>
+                <li class="iconLi"><span></span><li>
+                <li class="iconLi"><span></span><li>
+            </ul>
+        </div>
+    </div>
+</body>
+ <script>
+            $('.contentLeftUl').find('li').click(function(){
+                $(this).children('.hiddenWrapDiv').addClass('active').parent('li').siblings().children('.hiddenWrapDiv').removeClass('active');
+            })
+            $('.iconUl').find('.iconLi').click(function(){
+                var index = $(this).index();
+                console.log(index/2);
+                $(this).children('span').addClass('active').parent('li').siblings().children('span').removeClass('active');
+                $('.contentLeftLi').eq(index/2).children('.hiddenWrapDiv').addClass('active').parent('li').siblings().children('.hiddenWrapDiv').removeClass('active');
+            })
+            //1.
+           echarts.init(document.getElementById('one')).setOption({
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    type: 'line',
+                    areaStyle: {}
+                }]
+            });
+
+
+            // 2.绘制图表。
+            echarts.init(document.getElementById('pie')).setOption({
+                series : [
+                    {
+                        name: '访问来源',
+                        type: 'pie',
+                        radius: '55%',
+                        data:[
+                            {value:235, name:'视频广告'},
+                            {value:274, name:'联盟广告'},
+                            {value:310, name:'邮件营销'},
+                            {value:335, name:'直接访问'},
+                            {value:400, name:'搜索引擎'}
+                        ]
+                    }
+                ]
+            })
+
+             //3. 基于准备好的dom，初始化echarts实例
+             var css = {  
+                'background-color': 'blue',
+             };  
+             $("#main").css(css);   
+            var myChart = echarts.init(document.getElementById('main'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: 'ECharts 入门示例'
+                },
+                tooltip: {},
+                legend: {
+                    data:['销量']
+                },
+                xAxis: {
+                    data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20]
+                }]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+
+           //4.
+             echarts.init(document.getElementById('four')).setOption({
+               xAxis: {
+                    type: 'category',
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    type: 'line'
+                }]
+            })
+            
+            //5.
+            var xAxisData = [];
+            var data1 = [];
+            var data2 = [];
+            for (var i = 0; i < 100; i++) {
+                xAxisData.push('类目' + i);
+                data1.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5);
+                data2.push((Math.cos(i / 5) * (i / 5 -10) + i / 6) * 5);
+            }
+
+             echarts.init(document.getElementById('five')).setOption({
+                title: {
+                    text: '柱状图动画延迟'
+                },
+                legend: {
+                    data: ['bar', 'bar2'],
+                    align: 'left'
+                },
+                toolbox: {
+                    // y: 'bottom',
+                    feature: {
+                        magicType: {
+                            type: ['stack', 'tiled']
+                        },
+                        dataView: {},
+                        saveAsImage: {
+                            pixelRatio: 2
+                        }
+                    }
+                },
+                tooltip: {},
+                xAxis: {
+                    data: xAxisData,
+                    silent: false,
+                    splitLine: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                },
+                series: [{
+                    name: 'bar',
+                    type: 'bar',
+                    data: data1,
+                    animationDelay: function (idx) {
+                        return idx * 10;
+                    }
+                }, {
+                    name: 'bar2',
+                    type: 'bar',
+                    data: data2,
+                    animationDelay: function (idx) {
+                        return idx * 10 + 100;
+                    }
+                }],
+                animationEasing: 'elasticOut',
+                animationDelayUpdate: function (idx) {
+                    return idx * 5;
+                }
+            });
+             
+    </script>
+</html>
